@@ -5,7 +5,99 @@
 <title>Assignment 5, Part 2 - Calculator</title>
 <script>
 
+// STEP 1. Notice the markup that I’ve included for you in the web page.
+// There is a text box that will display the value of each button click and 16 different buttons each of which represents a major key on a basic calculator.
+// Begin adding an event listener to the window object that “listens” for the load event and when heard, calls a user-defined function called init().
+
+
+window.addEventListener('load', init, false);
+
+
+// STEP 2. Create the user-defined function called init().
+
+// STEP 3. Within the init() function, attach an event listener to each of the 16 buttons in the web page.
+// You will listen for the click event and when heard, a function called enter() should be called for each of the buttons except for the equal sign.
+// Since you are attaching an event listener to an object, you can pass in this.value as a parameter to each of the enter() function calls.
+
+
+/*    
+function init() {
+    one.addEventListener('click', enter, false);
+    two.addEventListener('click', enter, false);
+    three.addEventListener('click', enter, false);
+    four.addEventListener('click', enter, false);
+    five.addEventListener('click', enter, false);
+    six.addEventListener('click', enter, false);
+    seven.addEventListener('click', enter, false);
+    eight.addEventListener('click', enter, false);
+    nine.addEventListener('click', enter, false);
+    zero.addEventListener('click', enter, false);
+    divide.addEventListener('click', enter, false);
+    multiply.addEventListener('click', enter, false);
+    subtract.addEventListener('click', enter, false);
+    period.addEventListener('click', enter, false);
+    add.addEventListener('click', enter, false);
+    equal.addEventListener('click', calculate, false);
+}
+*/
+
+
+// STEP 4. For the equal button, call a function called calculate(). You will not pass any arguments into this function.
+
+// STEP 5. Create a user-defined function called enter() that accepts val as an argument.
+
+// STEP 6. Within the enter() function get the result text box by its ID and set its value plus equal to the val parameter being passed in.
+
+
+/*    
+var enter = function (val) {
+    this.val = document.getElementById(this.id);
+    result.value += this.val.value;
+};
+*/
+
+
+// STEP 7. Create a user-defined function called calculate() that doesn’t accept any arguments.
+    
+// STEP 8. Within the calculate() function get the result text box by its ID and set its value equal to the calculation currently stored in the result text box.
+// HINT: Use the built-in eval() function to perform the heavy lifting for you.
+
+
+var calculate = function () {
+    var calculation;
+    calculation = window.eval(document.getElementById('result').value.toString());
+    document.getElementById('result').value = calculation;
+};
+
+
+// Figure out a way to simplify your code so that you don’t have to manually attach an event handler to each and every button. 
+// You should be able to programmatically attach a listener to every button on the page and attach a handler that listens for the click without having to write so much code.
+// HINT: Remember the concept of “event bubbling”. Perhaps it makes more sense to listen for an event on a parent element rather than each and every button…
+
+
+function init() {
+
+    console.log('init works');
+    var body, button;
+    body = document.querySelector('body');
+    
+    body.addEventListener('click', function () {
+        console.log('body event works...  a button was clicked');
+
+        button = event.target.id.toString();
+
+        if (button === 'equal') {
+            calculate();
+        } else {
+            this.val = document.getElementById(event.target.id);
+            document.getElementById('result').value += this.val.value;
+        }
+    });
+}
+
+
 </script>
+    
 </head>
 
 <body>
